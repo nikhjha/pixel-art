@@ -9,6 +9,7 @@ let photoSelected = null;
 let effectSelected = null;
 let rgb = null;
 let particleColor = null;
+let isStarted = false;
 
 const animateDiv = (
   card,
@@ -62,6 +63,7 @@ const canvasConfig = () => {
 }
 
 const startCanvas = () => {
+    isStarted = true;
     setTimeout(()=>{canvasConfig()},1500);
 };
 
@@ -137,5 +139,7 @@ form.addEventListener("submit", (e) => {
 });
 
 window.addEventListener('resize', () => {
-  window.location.reload();
+  if(isStarted){
+    window.location.reload();
+  }
 })
