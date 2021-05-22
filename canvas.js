@@ -3,13 +3,10 @@ const canvas = document.getElementById('canvas');
 const ctx = canvas.getContext("2d");
 canvas.width = canvas.offsetWidth;
 canvas.height = canvas.offsetHeight;
-console.log(ctx);
+// const photo = new Image();
+// photo.src = images.ghost2;
 
-
-const photo = new Image();
-photo.src = images.ghost;
-
-const greyScaleImage = (r,g,b) => {
+const greyScaleImage = (photo,r,g,b) => {
     const picRatio = photo.width/photo.height;
     ctx.drawImage(photo,0,0,canvas.height*picRatio, canvas.height);
     let imageData = ctx.getImageData(0,0,canvas.width,canvas.height);
@@ -30,9 +27,10 @@ const greyScaleImage = (r,g,b) => {
     }
     imageData.data = mappedData;
     ctx.putImageData(imageData,0,0);
+
 }
 
-const analyzeImage = () => {
+const analyzeImage = (photo) => {
     const picRatio = photo.width/photo.height;
     ctx.drawImage(photo,0,0,canvas.height*picRatio, canvas.height);
     let imageData = ctx.getImageData(0,0,canvas.width,canvas.height);
@@ -65,8 +63,9 @@ const analyzeImage = () => {
 }
 
 class Particle {
-    constructor(){
-        this.x = Math.random()*canvas.width;
+    constructor(width){
+        this.maxX = width;
+        this.x = Math.random()*this.maxX;
         this.y = 0;
         this.size = Math.random()*1.5+1;
         this.velocityFunc = () => {
@@ -100,26 +99,32 @@ class Particle {
         this.x += this.movement.x;
         if(this.y >= canvas.height || this.x >= canvas.width){
             this.y = 0;
-            this.x = Math.random()*canvas.width;
+            this.x = Math.random()*this.maxX;
         }
     }
-    draw(scannedData){
+    draw(scannedData,colorType){
         ctx.beginPath();
-        ctx.fillStyle = scannedData[this.position.y][this.position.x].color;
+        if(colorType === '0'){
+            ctx.fillStyle = 'white';
+        }
+        else{
+            ctx.fillStyle = scannedData[this.position.y][this.position.x].color;
+        }
         ctx.arc(this.x,this.y,this.size,0,Math.PI*2);
         ctx.fill();
     }
 }
 
-const init = (numberOfParticles) => {
+const init = (numberOfParticles,photo) => {
     let particleArray = [];
+    const width = photo.width/photo.height*canvas.height;
     for(let i = 0; i<numberOfParticles; i++){
-        particleArray.push(new Particle());
+        particleArray.push(new Particle(width));
     }
     return particleArray;
 }
 
-const animate = (particleArray,scannedData) => {
+const animate = (particleArray,scannedData,colorType) => {
     // const picRatio = photo.width/photo.height;
     // ctx.drawImage(photo,0,0,canvas.height*picRatio, canvas.height);
     ctx.globalAlpha = 0.05;
@@ -129,26 +134,21 @@ const animate = (particleArray,scannedData) => {
     for(let i = 0; i<particleArray.length; i++){
         particleArray[i].update(scannedData);
         ctx.globalAlpha = particleArray[i].brightness*0.5;
-        particleArray[i].draw(scannedData);
+        particleArray[i].draw(scannedData,colorType);
     }
-    requestAnimationFrame(()=>{animate(particleArray,scannedData)});
+    requestAnimationFrame(()=>{animate(particleArray,scannedData,colorType)});
 }
 
-const pixelManipulation = () => {
-    const scannedData =  analyzeImage();
-    // console.log(scannedData);
-    // greyScaleImage(0,0,0);
-    let particleArray = init(6000);
-    animate(particleArray,scannedData);
+const pixelManipulation = (photo,effectType,rgb,particleColor) => {
+    if(effectType === '0'){
+        greyScaleImage(photo,rgb[0]-'0',rgb[1]-'0',rgb[2]-'0');
+    }else{
+        const scannedData = analyzeImage(photo);
+        let particleArray = init(6000,photo);
+        animate(particleArray,scannedData,particleColor);
+    }
 }
 
-photo.addEventListener('load', ()=>{
-    pixelManipulation();
-})
-
-window.addEventListener('resize', ()=>{
-    canvas.width = canvas.offsetWidth;
-    canvas.height = canvas.offsetHeight;
-    pixelManipulation();
-    }
-)
+// photo.addEventListener('load', ()=>{
+//     pixelManipulation("0",[0,80,0],null);
+// })

@@ -1,3 +1,6 @@
+:root {
+    --speed : 1s;
+}
 body {
     margin: 0;
     padding: 0;
@@ -9,4 +12,153 @@ body {
     top : 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    z-index: -100;
+    background-color: rgb(0,0,0);
+}
+#nav {
+    width: 100vw;
+    height: 100vh;
+    min-height: 800px;
+    background-color: rgba(0, 0, 180, 1);
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-direction: column;
+}
+.input-option {
+    display: none;
+}
+.nav-title {
+    margin-top: 100px;
+    margin-bottom: 200px;
+    color: white;
+    font-size: 80px;
+}
+.cards{
+    display: flex;
+    width: 70%;
+    justify-content: space-around;
+}
+.card {
+    width: 300px;
+    height: 200px;
+    box-shadow: 0px 20px 50px 0px black;
+    color: white;
+    position: relative;
+}
+.card-title {
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 180, 1);  
+    position: absolute;
+    top : 0;
+    left: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3em;
+    transition: transform var(--speed) linear;
+}
+@keyframes up {
+    to {
+        background-color: rgba(255,165,0,1);
+    }
+    from {
+        background-color: rgba(0, 0, 180, 1);
+        
+    }
+}
+@keyframes down {
+    to {
+        background-color: rgba(0, 0, 180, 1);   
+    }
+    from {
+        background-color: rgba(255,165,0,1);
+    }
+}
+.card-content {
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 1);
+    position: absolute;
+    top : 0;
+    left: 0;
+    z-index: 50;
+    color: black;
+    font-size: 1.2em;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    text-align: center;
+    transition: transform var(--speed) linear;
+}
+.card-content > div {
+    width: 100%;
+    padding: 10px 0px;
+}
+.card-content > div:hover {
+    background-color: orange;
+    color: white;
+}
+.card-content-panel-2 {
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 1);
+    position: absolute;
+    top : 0;
+    left: 0;
+    color: black;
+    font-size: 1.2em;
+    z-index: 10;
+    transition: transform var(--speed) linear;
+}
+.card-content-panel-2-options {
+    display: none;
+}
+.greyscale {
+    width: 100%;
+    height: 100%;
+}
+#rgb {
+    width: 100%;
+    height: 100%;
+}
+.inner-greyscale {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+.particle {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    text-align: center;
+}
+.particle > div {
+    width: 100%;
+    padding: 10px 0px;
+}
+.particle > div:hover {
+    background-color: orange;
+    color: white;
+}
+.button {
+    width: 50%;
+    height: 30px;
+    background-color: orange;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+}
+.option {
+    cursor: pointer;
 }

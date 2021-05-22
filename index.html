@@ -11,9 +11,79 @@
     
     <!-- link to javascript -->
     <script src="image.js"></script>
-    <script src="main.js" defer></script>
+    <script src="canvas.js" defer></script>
+    <script src="utility.js" defer></script>
 </head>
 <body>
+    <div id="nav">
+        <h1 class="nav-title">Pixel Arts</h1>
+        <div class="cards">
+            <div class="card" id="photo-selection">
+                <div class="card-title option">
+                    <input class="input-option" name="title" value="0"/>
+                    Photos
+                </div>
+                <div class="card-content">
+                    <div class="option"><input class="input-option" name="photo-option" value="ghost"/>Ghost</div>
+                    <div class="option"><input class="input-option" name="photo-option" value="ghost1"/>Ghost 1</div>
+                    <div class="option"><input class="input-option" name="photo-option" value="ghost2"/>Ghost 2</div>
+                </div>
+            </div>
+            <div class="card" id="effect-selection">
+                <div class="card-title option">
+                    <input class="input-option" name="title" value="1"/>
+                    Effects
+                </div>
+                <div class="card-content">
+                    <div class="option">
+                        <input class="input-option"  name="effect-option" value="0"/>
+                        Greyscale
+                    </div>
+                    <div class="option">
+                        <input class="input-option"  name="effect-option" value="1"/>
+                        Particle effect
+                    </div>
+                </div>
+                <div class="card-content-panel-2">
+                </div>
+                <div class="card-content-panel-2-options">
+                    <div class="greyscale">
+                        <form id="rgb">
+                            <div class="inner-greyscale">
+                                <div>
+                                    <label>Red   : </label>
+                                    <input type="number" name="red"/>
+                                </div>
+                                <div>
+                                    <label>Green : </label>
+                                    <input type="number" name="green"/>
+                                </div>
+                                <div>
+                                    <label>Blue  : </label>
+                                    <input type="number" name="blue"/>
+                                </div>
+                                <div class="button option" name="greyscale-effect">
+                                    <input class="input-option" name="greyscale-effect" type="submit" value="rgb"/>
+                                    Go
+                                </div>
+                            </div>
+                            
+                        </form>
+                    </div>
+                    <div class="particle">
+                        <div class="option">
+                            <input class="input-option"  name="particle-effect-option" value="0"/>
+                            White
+                        </div>
+                        <div class="option">
+                            <input class="input-option"  name="particle-effect-option" value="1"/>
+                            Original - Colors
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>    
+    </div>
     <canvas id='canvas'></canvas>
 </body>
 </html>
