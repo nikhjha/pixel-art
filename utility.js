@@ -135,3 +135,7 @@ form.addEventListener("submit", (e) => {
     animateDiv("0", "-50%", "50%", "0%");
   }
 });
+
+window.addEventListener('resize', () => {
+  window.location.reload();
+})

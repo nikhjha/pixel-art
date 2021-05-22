@@ -117,7 +117,10 @@ class Particle {
 
 const init = (numberOfParticles,photo) => {
     let particleArray = [];
-    const width = photo.width/photo.height*canvas.height;
+    let width = photo.width/photo.height*canvas.height;
+    if(width >= canvas.width){
+        width = canvas.width;
+    }
     for(let i = 0; i<numberOfParticles; i++){
         particleArray.push(new Particle(width));
     }
