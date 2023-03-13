@@ -1,0 +1,9 @@
+services:
+  app:
+    build: .
+    container_name: pixel_art_server
+    command: live-server --host=0.0.0.0 --no-browser --port=8001
+    ports:
+      - 8001:8001
+    volumes:
+      - .:/app
